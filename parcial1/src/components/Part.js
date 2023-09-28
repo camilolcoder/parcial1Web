@@ -2,7 +2,7 @@
 import { Card, Col, Row, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function Book(props) {
+function Part(props) {
 
   return (
     <Container className="fluid">
@@ -10,19 +10,23 @@ function Book(props) {
      <Card.Img
        style={{ height: "14rem" }}
        variant="top"
-       src={props.book.image}
+       src={props.part.image}
      />
      <Card.Body>
        <Card.Title>
-         <Link to={"/book/" + props.book.isbn}>
-           {props.book.isbn}
+         <Link to={"/parts/" + props.part.carModel}>
+           {props.part.partName}
          </Link>
        </Card.Title>
-       <Card.Text>{props.book.summary}</Card.Text>
+       <Card.Text>{props.part.carMaker}</Card.Text>
+       <Row>
+        <Card.Text>{props.part.price}</Card.Text>
+        <Card.Text>{props.part.carYear}</Card.Text>
+        </Row>
      </Card.Body>
    </Card>
     </Container>
   );
 }
 
-export default Book;
+export default Part;

@@ -1,31 +1,30 @@
 import {  Row } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
-import Book from "./Book";
-
+import Part from "./Part";
 const { useEffect, useState } = require("react");
 
-function Books(props) {
+function Parts(props) {
 
- const [books, setBooks] = useState([]);
+ const [parts, setParts] = useState([]);
 
  useEffect(() => {
    const URL =
-     "https://my.api.mockaroo.com/books.json?key=6a412540";
+     "https://raw.githubusercontent.com/camilolcoder/parcial1Web/master/datos.json";
    fetch(URL)
      .then((data) => data.json())
      .then((data) => {
-        setBooks(data);
+      setParts(data);
      });
  }, []);
 
  return (
      <Row xs="auto" className="g-2 justify-content-center" style={{margin: "auto"}}>
-     <h2 className="mt-2">Listado de libros</h2>
+     <h2 className="mt-2">Listado de partes</h2>
      <hr></hr>
      <Row>
-       {books.map((book) => (
+       {parts.map((part) => (
          <Col >
-           <Book book={book} />
+           <Part part={part} parts={parts} />
          </Col>
        ))}
      </Row>
@@ -34,4 +33,4 @@ function Books(props) {
  );
 }
 
-export default Books;
+export default Parts;
