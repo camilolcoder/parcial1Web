@@ -8,13 +8,12 @@ const { useEffect, useState } = require("react");
 
 function App() {
 
-  const [parts, setParts] = useState([]);
   return (
     <BrowserRouter>
        <Routes>
          <Route path="/" element={<Login />} />
-         <Route path="/parts" element={<Parts parts={parts} setParts={setParts}/>} />
-         <Route path="/parts/:partId" element={<PartsDetalle parts={parts} setParts={setParts}/>} />
+         <Route path="/parts" element={<Parts />} />
+         <Route path="/parts/:partId" element={<PartsDetalle/>} />
 
        </Routes>
      </BrowserRouter>

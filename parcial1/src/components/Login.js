@@ -2,13 +2,19 @@ import { useState } from 'react';
 import Container from 'react-bootstrap/Container'
 import { Card, Col, Carousel, Image, Button, Form, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
+
+
 
 
 function Login() {
 
-    const [formValues, setFormValues] = useState({email:"", password:"", favClass:"1"})
+    var roleBoolean = Math.random() < 0.5;
+    const [formValues, setFormValues] = useState({email:"", password:"", role:roleBoolean})
     const [validationStates, setValidationStates] = useState({ emailState: false, passwordState: false });
-  
+
+    const navigate = useNavigate()
+
     const handleEmailChange = ((e) => {
   
       setFormValues({...formValues, email: e.target.value})
@@ -20,7 +26,7 @@ function Login() {
       // const password = e.target.value;
       setFormValues({...formValues, password: e.target.value})
   
-      const isLengthValid = formValues.password.length >= 6;
+      const isLengthValid = formValues.password.length >= 5 // No sé por qué pero para que sea >= 6 tengo que dejarlo con 5;
     //   const containsLetter = /[a-zA-Z]/.test(formValues.password);
     //   const containsNumber = /[0-9]/.test(formValues.password);
   
@@ -29,17 +35,11 @@ function Login() {
       setValidationStates({ ...validationStates, passwordState: isPasswordValid });
       });
   
-    const handleSelectChange = ((e) => {
-      setFormValues({...formValues, favClass: e.target.value})
-      });
-
-  
     const clickSubmit = (() => {
       const isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email);
+      console.log(isEmailValid)
       setValidationStates({ ...validationStates, emailState: isEmailValid })
-      if (validationStates.emailState) {
-        alert(JSON.stringify(formValues));
-      } else {
+      if (!isEmailValid) {
         alert("Please correct the form errors before submitting");
       }
       })
@@ -48,6 +48,8 @@ function Login() {
         if (validationStates.passwordState) {
           alert(JSON.stringify(formValues));
           console.log(JSON.stringify(formValues))
+          localStorage.setItem("userLogged", JSON.stringify(formValues))
+          navigate("/parts")
         } else {
           alert("Please correct the form errors before submitting");
         }
@@ -58,17 +60,22 @@ function Login() {
     <Row className='p-5' style={{backgroundColor:'grey'}}>
     <Col  className='w-50'>
       <Form className='w-75'>
-      <Form.Group className="mb-6" controlId="formBasicEmail">
         {validationStates.emailState ? 
         (<div>
-            <Form.Label>Password</Form.Label>
+      <Form.Group className="mb-6" controlId="formBasicEmail">
+        <Form.Label><h2>{formValues.email}</h2></Form.Label>
         <Form.Control type="password" placeholder="Password"
         onChange={handlePasswordChange} value={formValues.password} style={{borderColor: validationStates.passwordState ? '' : 'red'}} />
         { !validationStates.passwordState && <Form.Text
-        className="text-muted">Your password should be have numbers and letters and
-        should be at least 9 char long</Form.Text>}
-        </div>) : 
+        className="text-muted">Your password should be at least 6 char long</Form.Text>}
+        </Form.Group>
+        <Button variant="primary" onClick={clickSubmit2}>
+        Submit
+        </Button>
+        </div>)
+         : 
         (<div>
+          <Form.Group className="mb-6" controlId="formBasicEmail">
             <Form.Label> { validationStates.emailState ? 
             (<h2>{formValues.email}</h2>):
             (<div> <h1>Accede</h1> <h4>Usa tu cuenta UniAlpes</h4> </div>)}
@@ -80,12 +87,12 @@ function Login() {
             :
              (<Form.Text className="text-muted">Your email should follow an established
               format.</Form.Text>)}
+              </Form.Group>
+              <Button variant="primary" onClick={clickSubmit}>
+              Submit
+            </Button>
             </div>)}
-      </Form.Group>
-  
-      <Button variant="primary" onClick={clickSubmit}>
-      Submit
-      </Button>
+     
       </Form>
     </Col> 
     </Row>
