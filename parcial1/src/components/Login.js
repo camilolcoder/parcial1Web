@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import { Card, Col, Carousel, Image, Button, Form, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage } from 'react-intl';
 
 
 
@@ -70,7 +71,7 @@ function Login() {
         className="text-muted">Your password should be at least 6 char long</Form.Text>}
         </Form.Group>
         <Button variant="primary" onClick={clickSubmit2}>
-        Submit
+        <FormattedMessage id='next' />
         </Button>
         </div>)
          : 
@@ -78,7 +79,7 @@ function Login() {
           <Form.Group className="mb-6" controlId="formBasicEmail">
             <Form.Label> { validationStates.emailState ? 
             (<h2>{formValues.email}</h2>):
-            (<div> <h1>Accede</h1> <h4>Usa tu cuenta UniAlpes</h4> </div>)}
+            (<div> <h1> <FormattedMessage id='access'/> </h1> <h4> <FormattedMessage id='user_your_account'/> </h4> </div>)}
             </Form.Label>
             <Form.Control type="email" placeholder="Enter email"
             onChange={handleEmailChange} value={formValues.email} style={{borderColor: validationStates.emailState ? '' : 'red'}}/>
@@ -89,7 +90,7 @@ function Login() {
               format.</Form.Text>)}
               </Form.Group>
               <Button variant="primary" onClick={clickSubmit}>
-              Submit
+              <FormattedMessage id='next' />
             </Button>
             </div>)}
      

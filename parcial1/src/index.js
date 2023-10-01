@@ -4,9 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { IntlProvider } from 'react-intl';
+import { messages } from './i18n/messages'
+import { LOCALES } from './i18n/locales';
+const { useEffect, useState } = require("react");
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
+  
   <React.StrictMode>
     <App />
   </React.StrictMode>

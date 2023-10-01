@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import React from 'react';
 import { Container , Col, Image, Row} from "react-bootstrap";
+import { FormattedMessage } from "react-intl";
 const { useEffect, useState } = require("react");
 
 
@@ -33,7 +34,7 @@ function handle_check_available() {
   return "No"
 }
 
-console.log(handle_check_available())
+//console.log(handle_check_available())
 
  return (
   <Container className="p-2">
@@ -50,7 +51,7 @@ console.log(handle_check_available())
       <div>
       <Row>
         <Col>
-          <h4>Car maker</h4>
+          <h4> <FormattedMessage id="car_maker"/> </h4>
         </Col>
         <Col>
           <input value={content.carMaker}></input>
@@ -58,7 +59,7 @@ console.log(handle_check_available())
       </Row>
       <Row>
         <Col>
-          <h4>Car model</h4>
+          <h4> <FormattedMessage id="car_model"/></h4>
         </Col>
         <Col>
           <input value={content.carModel}></input>
@@ -66,7 +67,7 @@ console.log(handle_check_available())
       </Row>
       <Row>
         <Col>
-          <h4>Car Year</h4>
+          <h4> <FormattedMessage id="car_year"/></h4>
         </Col>
         <Col>
           <input value={content.carYear}></input>
@@ -74,14 +75,14 @@ console.log(handle_check_available())
       </Row>
       <Row>
         <Col>
-          <h4>Availabe online</h4>
+          <h4> <FormattedMessage id="car_available"/></h4>
         </Col>
         <Col>
           <input value={handle_check_available()}></input>
         </Col>
       </Row>
       <Row>
-        <h4>Description</h4>
+        <h4> <FormattedMessage id="description"/></h4>
       </Row>
       <Row>
         <input value={content.description}></input>
@@ -90,7 +91,7 @@ console.log(handle_check_available())
       (<div>
         <Row>
           <Col>
-            <h4>Car maker</h4>
+            <h4> <FormattedMessage id="car_maker"/></h4>
           </Col>
           <Col>
             <h4>{content.carMaker}</h4>
@@ -98,7 +99,7 @@ console.log(handle_check_available())
         </Row>
         <Row>
           <Col>
-            <h4>Car model</h4>
+            <h4> <FormattedMessage id="car_model"/></h4>
           </Col>
           <Col>
             <h4>{content.carModel}</h4>
@@ -106,7 +107,7 @@ console.log(handle_check_available())
         </Row>
         <Row>
           <Col>
-            <h4>Car Year</h4>
+            <h4> <FormattedMessage id="car_year"/></h4>
           </Col>
           <Col>
             <h4>{content.carYear}</h4>
@@ -114,14 +115,14 @@ console.log(handle_check_available())
         </Row>
         <Row>
           <Col>
-            <h4>Availabe online</h4>
+            <h4> <FormattedMessage id="car_available"/></h4>
           </Col>
           <Col>
-            <h4>{handle_check_available}</h4>
+            <h4>{handle_check_available()}</h4>
           </Col>
         </Row>
         <Row>
-          <h4>Description</h4>
+          <h4> <FormattedMessage id="description"/></h4>
         </Row>
         <Row>
           <p>{content.description}</p>
