@@ -9,6 +9,10 @@ function PartsDetalle(props) {
  console.log(params.partId)
  const [parts, setParts] = useState([])
 
+ const userData = localStorage.getItem("userLogged")
+ const userComplete = JSON.parse(userData)
+ console.log(userComplete.role)
+
 useEffect(() => {
   const URL =
     "https://raw.githubusercontent.com/camilolcoder/parcial1Web/master/datos.json";
@@ -22,6 +26,15 @@ useEffect(() => {
 const content = parts.find((part) => part.carModel === (params.partId)) || {};
 console.log(content)
 
+function handle_check_available() {
+  if (content.available){
+    return "Yes"
+  }
+  return "No"
+}
+
+console.log(handle_check_available())
+
  return (
   <Container className="p-2">
     <Row className="w-75">
@@ -33,12 +46,14 @@ console.log(content)
     <Col className="w-50">
       <h1>{content.partName}</h1>
       <hr></hr>
+      {userComplete.role ? (
+      <div>
       <Row>
         <Col>
           <h4>Car maker</h4>
         </Col>
         <Col>
-          <h4>{content.carMaker}</h4>
+          <input value={content.carMaker}></input>
         </Col>
       </Row>
       <Row>
@@ -46,7 +61,7 @@ console.log(content)
           <h4>Car model</h4>
         </Col>
         <Col>
-          <h4>{content.carModel}</h4>
+          <input value={content.carModel}></input>
         </Col>
       </Row>
       <Row>
@@ -54,7 +69,7 @@ console.log(content)
           <h4>Car Year</h4>
         </Col>
         <Col>
-          <h4>{content.carYear}</h4>
+          <input value={content.carYear}></input>
         </Col>
       </Row>
       <Row>
@@ -62,15 +77,56 @@ console.log(content)
           <h4>Availabe online</h4>
         </Col>
         <Col>
-          <h4>{content.available}</h4>
+          <input value={handle_check_available()}></input>
         </Col>
       </Row>
       <Row>
         <h4>Description</h4>
       </Row>
       <Row>
-        <p>{content.description}</p>
+        <input value={content.description}></input>
       </Row>
+      </div> ):
+      (<div>
+        <Row>
+          <Col>
+            <h4>Car maker</h4>
+          </Col>
+          <Col>
+            <h4>{content.carMaker}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h4>Car model</h4>
+          </Col>
+          <Col>
+            <h4>{content.carModel}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h4>Car Year</h4>
+          </Col>
+          <Col>
+            <h4>{content.carYear}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h4>Availabe online</h4>
+          </Col>
+          <Col>
+            <h4>{handle_check_available}</h4>
+          </Col>
+        </Row>
+        <Row>
+          <h4>Description</h4>
+        </Row>
+        <Row>
+          <p>{content.description}</p>
+        </Row>
+        </div> )}
     </Col>
     </Row>
   </Container>
